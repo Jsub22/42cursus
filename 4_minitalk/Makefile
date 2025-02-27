@@ -6,12 +6,12 @@
 #    By: subjeong <subjeong@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/21 15:31:42 by subjeong          #+#    #+#              #
-#    Updated: 2025/02/21 18:09:30 by subjeong         ###   ########.fr        #
+#    Updated: 2025/02/26 20:33:02 by subjeong         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -D_POSIX_C_SOURCE=200112L
 
 SRCDIR = .
 HEADERDIR = .
