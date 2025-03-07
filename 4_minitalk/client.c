@@ -6,7 +6,7 @@
 /*   By: subjeong <subjeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 18:09:12 by subjeong          #+#    #+#             */
-/*   Updated: 2025/03/07 19:15:17 by subjeong         ###   ########.fr       */
+/*   Updated: 2025/03/07 19:24:16 by subjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	ft_client_handler(int signo, siginfo_t *siginfo, void *context)
 {
 	(void)siginfo;
 	(void)context;
-	else if (signo == SIGUSR2)
+	if (signo == SIGUSR2)
 	{
 		ft_putstr_fd("Success : 모든 전송이 끝났습니다.\n", 1);
 		exit(0);
