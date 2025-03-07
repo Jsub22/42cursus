@@ -6,7 +6,7 @@
 /*   By: subjeong <subjeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 17:07:10 by subjeong          #+#    #+#             */
-/*   Updated: 2025/03/05 17:07:12 by subjeong         ###   ########.fr       */
+/*   Updated: 2025/03/07 19:13:32 by subjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	ft_handler(int signal)
 	}
 }
 
-int	main (int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	(void)argv;
 	if (argc != 1)

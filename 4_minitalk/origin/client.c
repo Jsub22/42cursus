@@ -6,7 +6,7 @@
 /*   By: subjeong <subjeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 17:07:21 by subjeong          #+#    #+#             */
-/*   Updated: 2025/03/05 17:07:22 by subjeong         ###   ########.fr       */
+/*   Updated: 2025/03/07 19:13:25 by subjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void	ft_send_str(int pid, char *input)
 	ft_send_bit(pid, '\0');
 }
 
-int	main (int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	int	pid;
 
