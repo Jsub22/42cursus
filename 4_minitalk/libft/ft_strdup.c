@@ -1,33 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: subjeong <subjeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/21 18:09:25 by subjeong          #+#    #+#             */
-/*   Updated: 2025/03/05 19:13:51 by subjeong         ###   ########.fr       */
+/*   Created: 2024/10/02 15:41:45 by subjeong          #+#    #+#             */
+/*   Updated: 2024/10/22 15:37:17 by subjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
-# include <unistd.h>
-# include <stdlib.h>
-# include <signal.h>
-# include "./libft/libft.h"
+#include "libft.h"
 
-typedef struct s_data
+char	*ft_strdup(const char *s)
 {
-	long unsigned int		bit;
-	// int		bit;
-	int		data;
-	int 	pid;
-	char	*msg;
-} t_data;
+	char	*arr;
+	int		len;
 
-void	ft_error_exit(char *msg);
-void	ft_set_sigaction(struct sigaction *sa);
-void	ft_send_signal(pid_t pid, int signo);
-
-#endif
+	len = ft_strlen(s);
+	arr = (char *)malloc(sizeof(char) * (len + 1));
+	if (arr == NULL)
+		return (NULL);
+	arr[len] = '\0';
+	while (--len >= 0)
+		arr[len] = s[len];
+	return (arr);
+}

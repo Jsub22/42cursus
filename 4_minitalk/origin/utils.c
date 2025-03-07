@@ -5,40 +5,23 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: subjeong <subjeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/21 18:09:36 by subjeong          #+#    #+#             */
-/*   Updated: 2025/02/22 18:27:29 by subjeong         ###   ########.fr       */
+/*   Created: 2025/03/05 17:07:30 by subjeong          #+#    #+#             */
+/*   Updated: 2025/03/05 17:07:31 by subjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+void	ft_putchar_fd(char c, int fd)
 {
-	char	*arr;
-	int		len;
-	int		i;
-	int		idx;
-
-	if (!s1 || !s2)
-		return (NULL);
-	len = ft_strlen(s1) + ft_strlen(s2);
-	arr = (char *)malloc(sizeof(char) * (len + 1));
-	if (arr == NULL)
-		return (NULL);
-	idx = 0;
-	i = 0;
-	while (s1 && s1[i])
-		arr[idx++] = s1[i++];
-	i = 0;
-	while (s2 && s2[i])
-		arr[idx++] = s2[i++];
-	arr[len] = '\0';
-	return (arr);
+	if (fd < 0)
+		return ;
+	write(fd, &c, 1);
 }
 
 void	ft_putstr_fd(char *s, int fd)
 {
-	int len;
+	int	len;
 
 	if (!s || fd < 0)
 		return ;

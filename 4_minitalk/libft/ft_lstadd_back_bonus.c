@@ -1,33 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_lstadd_back_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: subjeong <subjeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/21 18:09:25 by subjeong          #+#    #+#             */
-/*   Updated: 2025/03/05 19:13:51 by subjeong         ###   ########.fr       */
+/*   Created: 2024/10/12 21:12:09 by subjeong          #+#    #+#             */
+/*   Updated: 2024/10/22 15:46:17 by subjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
-# include <unistd.h>
-# include <stdlib.h>
-# include <signal.h>
-# include "./libft/libft.h"
+#include "libft.h"
 
-typedef struct s_data
+void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	long unsigned int		bit;
-	// int		bit;
-	int		data;
-	int 	pid;
-	char	*msg;
-} t_data;
+	t_list	*tmp;
 
-void	ft_error_exit(char *msg);
-void	ft_set_sigaction(struct sigaction *sa);
-void	ft_send_signal(pid_t pid, int signo);
-
-#endif
+	if (!lst || !new)
+		return ;
+	tmp = *lst;
+	if (!tmp)
+		*lst = new;
+	else
+	{
+		while (tmp->next)
+			tmp = tmp->next;
+		tmp->next = new;
+	}
+}

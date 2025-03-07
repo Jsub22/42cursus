@@ -1,33 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_lstiter_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: subjeong <subjeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/21 18:09:25 by subjeong          #+#    #+#             */
-/*   Updated: 2025/03/05 19:13:51 by subjeong         ###   ########.fr       */
+/*   Created: 2024/10/12 21:12:51 by subjeong          #+#    #+#             */
+/*   Updated: 2024/10/22 15:34:38 by subjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
-# include <unistd.h>
-# include <stdlib.h>
-# include <signal.h>
-# include "./libft/libft.h"
+#include "libft.h"
 
-typedef struct s_data
+void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
-	long unsigned int		bit;
-	// int		bit;
-	int		data;
-	int 	pid;
-	char	*msg;
-} t_data;
+	t_list	*tmp;
 
-void	ft_error_exit(char *msg);
-void	ft_set_sigaction(struct sigaction *sa);
-void	ft_send_signal(pid_t pid, int signo);
-
-#endif
+	if (!lst || !f)
+		return ;
+	tmp = lst;
+	while (tmp)
+	{
+		f(tmp->content);
+		tmp = tmp->next;
+	}
+}

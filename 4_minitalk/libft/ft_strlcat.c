@@ -1,33 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: subjeong <subjeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/21 18:09:25 by subjeong          #+#    #+#             */
-/*   Updated: 2025/03/05 19:13:51 by subjeong         ###   ########.fr       */
+/*   Created: 2024/10/11 16:16:09 by subjeong          #+#    #+#             */
+/*   Updated: 2024/10/24 15:26:42 by subjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
-# include <unistd.h>
-# include <stdlib.h>
-# include <signal.h>
-# include "./libft/libft.h"
+#include "libft.h"
 
-typedef struct s_data
+size_t	ft_strlcat(char *dest, const char *src, size_t size)
 {
-	long unsigned int		bit;
-	// int		bit;
-	int		data;
-	int 	pid;
-	char	*msg;
-} t_data;
+	size_t	d_len;
+	size_t	s_len;
+	size_t	i;
 
-void	ft_error_exit(char *msg);
-void	ft_set_sigaction(struct sigaction *sa);
-void	ft_send_signal(pid_t pid, int signo);
-
-#endif
+	d_len = ft_strlen(dest);
+	s_len = ft_strlen(src);
+	i = 0;
+	if (d_len > size)
+		return (size + s_len);
+	while (src[i] && d_len + i + 1 < size)
+	{
+		dest[d_len + i] = src[i];
+		i++;
+	}
+	if (d_len != size)
+	{
+		dest[d_len + i] = '\0';
+	}
+	return (d_len + s_len);
+}

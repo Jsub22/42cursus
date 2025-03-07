@@ -1,33 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: subjeong <subjeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/21 18:09:25 by subjeong          #+#    #+#             */
-/*   Updated: 2025/03/05 19:13:51 by subjeong         ###   ########.fr       */
+/*   Created: 2024/10/11 16:29:33 by subjeong          #+#    #+#             */
+/*   Updated: 2024/10/22 15:59:59 by subjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
-# include <unistd.h>
-# include <stdlib.h>
-# include <signal.h>
-# include "./libft/libft.h"
+#include "libft.h"
 
-typedef struct s_data
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	long unsigned int		bit;
-	// int		bit;
-	int		data;
-	int 	pid;
-	char	*msg;
-} t_data;
+	char			*arr;
+	unsigned int	len;
+	unsigned int	i;
 
-void	ft_error_exit(char *msg);
-void	ft_set_sigaction(struct sigaction *sa);
-void	ft_send_signal(pid_t pid, int signo);
-
-#endif
+	if (!s || !f)
+		return (NULL);
+	len = ft_strlen(s);
+	arr = (char *)malloc(sizeof(char) * (len + 1));
+	if (arr == NULL)
+		return (NULL);
+	arr[len] = '\0';
+	i = 0;
+	while (i < len)
+	{
+		arr[i] = f(i, s[i]);
+		i++;
+	}
+	return (arr);
+}

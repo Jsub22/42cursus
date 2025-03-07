@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sigaction.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: subjeong <subjeong@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/03 19:09:45 by subjeong          #+#    #+#             */
+/*   Updated: 2025/03/07 15:26:16 by subjeong         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minitalk.h"
 
 void	ft_error_exit(char *msg)
@@ -26,6 +38,4 @@ void	ft_send_signal(pid_t pid, int signo)
 		if (kill(pid, signo) < 0)
 			ft_error_exit("Error : SIGUSR2 신호를 보내지 못했습니다.");
 	}
-	else
-		usleep(125);
 }

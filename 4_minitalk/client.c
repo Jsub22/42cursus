@@ -6,7 +6,7 @@
 /*   By: subjeong <subjeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 18:09:12 by subjeong          #+#    #+#             */
-/*   Updated: 2025/02/27 16:02:52 by subjeong         ###   ########.fr       */
+/*   Updated: 2025/03/07 15:36:28 by subjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,54 +19,122 @@ static void	ft_client_handler(int signo, siginfo_t *siginfo, void *context)
 
 	if (signo == SIGUSR1)
 	{
-		ft_putstr_fd("Error : ...\n", 1);
+		// ft_putstr_fd("Success : 전송했습니다.\n", 1);
 	}
 	else if (signo == SIGUSR2)
 	{
-		ft_putstr_fd("Success : 연결에 성공했습니다.\n", 1);
+		ft_putstr_fd("Success : 모든 전송이 끝났습니다.\n", 1);
 		exit(0);
 	}
+	else
+	{
+		ft_error_exit("Error : 우효~~한 신호가 아닙니다.\n");
+	}
 }
+
+// static void ft_send_char(pid_t pid, char msg)
+// {
+// 	int	bit;
+
+// 	bit = ((sizeof(char) * 8) - 1);
+// 	while (bit >= 0)
+// 	{
+// 		if (((msg >> bit) & 1) + '0' == '0')
+// 			ft_send_signal(pid, SIGUSR1);
+// 		else
+// 			ft_send_signal(pid, SIGUSR2);
+// 		usleep(100);
+// 		// pause();
+// 		--bit;
+// 	}
+// }
+
+void	ft_send_char(pid_t pid, char msg)
+{
+	int		bitshift;
+
+	bitshift = ((sizeof(char) * 8) - 1);
+	while (bitshift >= 0)
+	{
+		// ft_putchar_fd((msg >> bitshift), 1);
+		if (((msg >> bitshift) & 1) == 0)
+			ft_send_signal(pid, SIGUSR1);
+		else
+			ft_send_signal(pid, SIGUSR2);
+		// usleep(124);
+		pause();
+		--bitshift;
+	}
+}
+
+
+// static void ft_send_int(pid_t pid, int len)
+// {
+// 	int	bit;
+
+// 	bit = ((sizeof(int) * 8) - 1);
+// 	while (bit >= 0)
+// 	{
+// 		if (((len >> bit) & 1) + '0' == '0')
+// 			ft_send_signal(pid, SIGUSR1);
+// 		else
+// 			ft_send_signal(pid, SIGUSR2);
+// 		usleep(100);
+// 		// pause();
+// 		--bit;
+// 	}
+// }
+
+void	ft_send_int(pid_t pid, int len)
+{
+	int		bitshift;
+
+	bitshift = ((sizeof(int) * 8) - 1);
+	while (bitshift >= 0)
+	{
+		// ft_putnbr_fd((len >> bitshift) & 1, 1);
+		// ft_putchar_fd(' ', 1);
+		if (((len >> bitshift) & 1) == 0)
+			ft_send_signal(pid, SIGUSR1);
+		else
+			ft_send_signal(pid, SIGUSR2);
+		// usleep(124);
+
+		pause();
+		--bitshift;
+	}
+}
+
 
 static void	ft_send_msg(pid_t pid, char *msg)
 {
 	int idx;
-	int	bit;
 
+	// ft_putnbr_fd(ft_strlen(msg), 1);
+	ft_send_int(pid, ft_strlen(msg)+1);
 	idx = 0;
-	bit = 0;
+	// ft_putchar_fd('C', 1);
 	while (msg[idx] != '\0')
 	{
-		while (bit < 8)
-		{
-			if ((msg[idx] >> bit) & 1)
-				ft_send_signal(pid, SIGUSR1);
-			else
-				ft_send_signal(pid, SIGUSR2);
-		}
-		bit--;
+		// ft_putchar_fd('c', 1);
+		ft_send_char(pid, msg[idx]);
+		idx++;
 	}
-	if (msg[idx] == '\0')
-	{
-		while (bit < 8)
-		{
-			ft_send_signal(pid, SIGUSR2);
-			bit--;
-		}
-		// pause();
-	}
+	ft_send_char(pid, '\n');
+	// ft_putchar_fd('N', 1);
+	ft_send_char(pid, '\0');
+	// ft_putchar_fd('-', 1);
+	// pause();
 }
 
 int	main (int argc, char **argv)
 {
-	struct sigaction sa;
+	struct sigaction	sa;
 
 	if (argc != 3)
 		ft_error_exit("Error: ./client [Server PID] [Message] 으로 입력해 주세요.\n");
-	else if (kill(ft_atoi(argv[1]), SIGUSR1) < 0)
+	if (kill(ft_atoi(argv[1]), SIGUSR1) < 0)
 		ft_error_exit("Error: 존재하지 않는 Server PID 입니다.\n");
-	// else
-	// 	pause();
 
 	sa.sa_flags = SA_RESTART;
 	sa.sa_sigaction = ft_client_handler;
@@ -78,7 +146,7 @@ int	main (int argc, char **argv)
 	ft_putnbr_fd(ft_atoi(argv[1]), 1);
 	ft_putstr_fd(" ]\n", 1);
 
-	ft_send_msg(ft_atoi(argv[1]), argv[2]);
+	ft_send_msg((pid_t)ft_atoi(argv[1]), argv[2]);
 
 	return (0);
 }
