@@ -6,7 +6,7 @@
 #    By: subjeong <subjeong@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/21 15:31:42 by subjeong          #+#    #+#              #
-#    Updated: 2025/03/04 14:51:07 by subjeong         ###   ########.fr        #
+#    Updated: 2025/03/11 16:41:25 by subjeong         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,4 +56,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: $(CLIENT_NAME) $(SERVER_NAME) all clean fclean re
+.PHONY: all clean fclean re
