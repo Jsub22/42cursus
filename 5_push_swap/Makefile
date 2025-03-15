@@ -6,7 +6,7 @@
 #    By: subjeong <subjeong@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/19 03:06:52 by subjeong          #+#    #+#              #
-#    Updated: 2025/02/07 19:16:18 by subjeong         ###   ########.fr        #
+#    Updated: 2025/03/14 20:18:10 by subjeong         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,8 @@ SRCS =	$(SRCDIR)/main.c \
 		$(SRCDIR)/stack.c \
 		$(SRCDIR)/validation.c \
 		$(SRCDIR)/push_swap.c \
-		$(SRCDIR)/utils.c
+		$(SRCDIR)/utils.c \
+		$(SRCDIR)/error.c
 
 OBJS = $(SRCS:.c=.o)
 

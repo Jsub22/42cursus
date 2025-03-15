@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   validation.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: subjeong <subjeong@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/12 16:40:56 by subjeong          #+#    #+#             */
+/*   Updated: 2025/03/15 23:14:22 by subjeong         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "main.h"
 
 static int is_valid_num(char *s)
@@ -8,15 +20,22 @@ static int is_valid_num(char *s)
 	if (ft_strlen(s) == 0)
 		return (-1);
 	i = 0;
-
+	if (s[i] == '+' || s[i] == '-')
+		i++;
 	while (s && s[i] && s[i] != '\n')
 	{
-		if (ft_isdigit(s[i++]) == 0)
+		if (ft_isdigit(s[i++]) == -1)
+		{
+			// ft_putstr_fd("a", 1);
 			return (-1);
+		}
 	}
 	ret = ft_atolli(s);
 	if (ret < -2147483648 || ret > 2147483647)
+	{
+		// ft_putstr_fd("b", 1);
 		return (-1);
+	}
 	else
 		return (1);
 }
@@ -34,18 +53,14 @@ static int is_valid_cmp(char *s1, char *s2)
 			return (-1);
 		else if (tmp > 0)
 			return (1);
-		else
-			return (0);
 	}
-	else
-		return (0);
+	return (0);
 }
 
 int	is_valid_args(int argc, char *argv[])
 {
 	int	i;
 	int j;
-	int	cnt;
 	int tmp;
 
 	i = 1;
@@ -56,7 +71,6 @@ int	is_valid_args(int argc, char *argv[])
 		i++;
 	}
 	i = 0;
-	cnt = 0;
 	while (argv && argv[++i])
 	{
 		j = i;
@@ -64,12 +78,11 @@ int	is_valid_args(int argc, char *argv[])
 		{
 			tmp = is_valid_cmp(argv[i], argv[j]);
 			if (tmp == -1)
+			{
+				// ft_putstr_fd("c", 1);
 				return (-1);
-			cnt += tmp;
+			}
 		}
 	}
-	if (argc == 2 || cnt == 0)
-		return (1);
-	else
-		return (1);
+	return (1);
 }

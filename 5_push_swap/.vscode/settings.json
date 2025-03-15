@@ -1,0 +1,13 @@
+{
+	"files.associations": {
+		"cstdlib": "c",
+		"main.h": "c",
+		"charconv": "c",
+		"algorithm": "c",
+		"format": "c",
+		"chrono": "c",
+		"random": "c",
+		"limits": "c",
+		"stdio.h": "c"
+	}
+}
